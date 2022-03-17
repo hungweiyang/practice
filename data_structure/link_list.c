@@ -47,24 +47,65 @@ void insert_v2(int val)
     return;
 }
 
+void remove_v1(int val)
+{
+    struct node *iterator = head;
+    struct node *prev = head;
+
+    while (iterator && iterator->val != val) {
+        prev = iterator;
+        iterator = iterator->next;
+    }
+
+    if (iterator == head)
+        head = head->next;
+    else
+        prev->next = iterator->next;
+
+    return;  
+}
+
+void remove_v2(int val)
+{
+    struct node **iterator = &head;
+
+    while (*iterator && (*iterator)->val != val)
+        iterator = &((*iterator)->next);
+
+    *iterator = (*iterator)->next;
+
+    return;  
+}
+
 void traverse()
 {   
     struct node *iterator = head;
   
     while (iterator)
     {
-        printf("%d\n", iterator->val);
+        printf("%d, ", iterator->val);
         iterator = iterator->next;
     } 
+
+    printf("\n");
 }
 
 int main()
 {
     void (*insert)(int) = &insert_v2;
+    void (*remove)(int) = &remove_v2;
 
     insert(2);
     insert(100);
     insert(1);
+    insert(5566);
+    insert(33);
 
     traverse();
+
+    remove (2);
+    traverse();
+
+    remove (1);
+    traverse();  
 }
