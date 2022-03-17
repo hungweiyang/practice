@@ -60,7 +60,7 @@ void remove_v1(int val)
     if (iterator == head)
         head = head->next;
     else
-        prev->next = iterator->next;
+        prev->next = prev->next->next;
 
     return;  
 }
@@ -93,7 +93,7 @@ void traverse()
 int main()
 {
     void (*insert)(int) = &insert_v2;
-    void (*remove)(int) = &remove_v2;
+    void (*remove)(int) = &remove_v1;
 
     insert(2);
     insert(100);
@@ -103,9 +103,9 @@ int main()
 
     traverse();
 
-    remove (2);
+    remove(2);
     traverse();
 
-    remove (1);
+    remove(1);
     traverse();  
 }
