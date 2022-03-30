@@ -1,6 +1,41 @@
 #include <stdio.h>
 #include <string.h>
 
+void question_multiple_three()
+{
+    int target, i = 2;
+
+    for (i = 0; i < 1000; ++i) 
+    {
+        target = i;     
+        
+        do {
+          int odd_sum = 0;
+          int even_sum = 0;
+        
+          while (1) {
+              if (target > 0) {
+                  even_sum += target & 1;
+                  target >>= 1;
+              } else
+                  break;
+              
+              if (target > 0) {
+                  odd_sum += target & 1;
+                  target >>= 1;
+              } else
+                  break;
+          }
+          target = abs(even_sum - odd_sum);
+        } while (target > 3);
+  
+        if (target == 1 || target == 2)
+            printf("%d is not multiple of three\n", i);
+        else
+            printf("%d is multiple of three\n", i);
+    }
+}
+
 void question_process_sections()
 {
     /*
@@ -74,6 +109,6 @@ void question_pointer_of_array()
 int main()
 {
 
-    
+    question_multiple_three();
     return 0;
 }
