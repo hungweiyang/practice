@@ -7,6 +7,44 @@ void swap(int *a, int *b)
     *b = t;
 }
 
+void mergesort(int a[], int len)
+{
+    if (len <= 1)
+        return;
+
+    int b[len];
+    mergesort(a, len/2);
+    mergesort(a + len/2, len/2 + len%2);
+
+    int i = 0;
+    int j = len/2;
+    int k = 0;
+    for (; i < len/2 && j < len; ++k) {
+        if (a[i] < a[j]) {
+            b[k] = a[i];
+            i++;
+        } else {
+            b[k] = a[j];
+            j++;
+        }
+    }
+
+    if (i == len/2) {
+        for (; j < len; ++k) {
+            b[k] = a[j];
+            ++j;
+        }
+    } else {
+        for (; i < len/2; ++k) {
+            b[k] = a[i];
+            ++i;
+        }
+    }
+
+    for (i = 0; i < len; i++)
+        a[i] = b[i];
+}
+
 void bubblesort(int a[], int len)
 {
     for (int i = 0; i < len - 1; i++)
@@ -55,9 +93,10 @@ int main()
     
     for (int i = 0; i < len; i++) printf("%d ", a[i]);
     printf("\n");
-    
+
+    mergesort(a, len);
     //bubblesort(a, len);
-    quicksort(a, 0, len-1);
+    //quicksort(a, 0, len-1);
     
     for (int i = 0; i < len; i++) printf("%d ", a[i]);
     printf("\n");
