@@ -65,12 +65,12 @@ void bubblesort2(int a[], int len)
 {
     for (int i = 0; i < len - 1; i++)
     {
-        for (int j = i; j < len - 1; j++)
+        for (int j = i+1; j < len - 1; j++)
         {
-            if (a[j] > a[j+1])
+            if (a[i] > a[j+1])
             {
-                int t = a[j];
-                a[j] = a[j+1];
+                int t = a[i];
+                a[i] = a[j+1];
                 a[j+1] = t;
             }    
         }
@@ -118,6 +118,23 @@ void insertion_sort(int a[], int len)
     }    
 }
 
+void insert_sort(int a[], int len)
+{
+  int key;
+  for (int i = 1; i < len; i++) {
+    int j;
+    key = a[i];
+    for (j = i-1; j > 0; j--) {
+      if (a[j] > key) {
+        a[j+1] = a[j];
+      }
+      else 
+        break;
+    }
+    a[j+1] = key;
+  }
+}
+
 int main()
 {
     int a[] = {77, 55, -44, 33, 11, 0, 2, 8, 10, -1, 30};
@@ -129,7 +146,7 @@ int main()
     //mergesort(a, len);
     //bubblesort2(a, len);
     //quicksort(a, 0, len-1);
-    insertion_sort(a, len);    
+    insert_sort(a, len);    
     
     for (int i = 0; i < len; i++) printf("%d ", a[i]);
     printf("\n");
