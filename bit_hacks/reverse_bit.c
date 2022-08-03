@@ -33,8 +33,8 @@ void reverse_bits()
   // method 4
   // http://graphics.stanford.edu/~seander/bithacks.html#BitReverseObvious
   // eliminated one iteration of the for loop
-  unsigned char v = 0b10101;
-  unsigned char r = v;  // get LSB while assigning
+  unsigned int v = 0x12345678;
+  unsigned int r = v;  // get LSB while assigning
   int s = sizeof(v) * 8 - 1;
   for (v >>= 1; v; v >>= 1)
   {
@@ -43,7 +43,8 @@ void reverse_bits()
     --s;
   }
   r <<= s;
-  
+
+  printf("%x\n", r);
   for (int i = sizeof(r)*8-1; i >= 0; i--)
   {
     printf("%d", (r >> i) & 1);    
