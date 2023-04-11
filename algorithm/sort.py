@@ -49,10 +49,30 @@ class mergeSort:
       nums[i] = temp[i-begin]
 
 class selectionSort:
-        
+  def __init__(self, nums: List[int]):
+    for i in range(len(nums)-1):
+      min = i
+      for j in range(i+1, len(nums)):
+        if nums[min] > nums[j]:
+          min = j
+      nums[i], nums[min] = nums[min], nums[i]
 
-nums = [4, 5, 1, 2, 3]
-#nums = [random.randint(-100, 100) for i in range(10)]
+class insertionSort:
+  def __init__(self, nums: List[int]):
+    for i in range(1, len(nums)):
+      j = i
+      while j > 0 and nums[j] < nums[j-1]:
+          nums[j], nums[j-1] = nums[j-1], nums[j]
+          j = j-1
+
+class insertionSort2:
+  def __init__(self, nums: List[int]):
+    for i in range(1, len(nums)):
+      for j in range(0, i):
+        if nums[i] < nums[j]: nums[i], nums[j] = nums[j], nums[i]
+
+#nums = [4, 5, 1, 2, 3]
+nums = [random.randint(-100, 100) for i in range(10)]
 print(nums)
-selectionSort(nums)
+insertionSort2(nums)
 print(nums)
